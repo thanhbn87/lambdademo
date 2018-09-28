@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Demo lambda to get AZs in Oregon
+Resources:
+  TimeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: describeAz.handler
+      Runtime: python3.6
+      CodeUri: ./AWS
+      MemorySize: 128
+      Timeout: 30
+      Events:
+        MyTimeApi:
+          Type: Api
+          Properties:
+            Path: /getazs
+            Method: GET
+      Environment:
+        Variables:
+          REGION: us-west-2
